@@ -120,9 +120,6 @@ public class DeviceAppsPlugin implements
                     result.success(openApp(packageName));
                 }
                 break;
-            case "getActivities":
-                result.success(getActivities());
-                break;
             case "openAppSettings":
                 if (!call.hasArgument("package_name") || TextUtils.isEmpty(call.argument("package_name").toString())) {
                     result.error("ERROR", "Empty or null package name", null);
@@ -203,19 +200,6 @@ public class DeviceAppsPlugin implements
         }
 
         return false;
-    }
-
-    private List<String> getActivities() {
-        ActivityManager manager = (ActivityManager) context
-                .getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningAppProcessInfo> processes = manager
-                .getRunningAppProcesses();
-
-        List<String> result = [];
-        for (RunningAppProcessInfo process : processes) {
-            result.add(process.processName);
-        }
-        return result;
     }
 
     private boolean openAppSettings(@NonNull String packageName) {
