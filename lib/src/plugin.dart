@@ -90,6 +90,19 @@ class DeviceApps {
     }
   }
 
+  /// Provide all information for a given app by its [packageName]
+  /// [includeAppIcon] will also include the icon for the app.
+  /// To get it, you have to cast the object to [ApplicationWithIcon].
+  static Future<dynamic> getActivities() async {
+    try {
+      final Object? apps = await _methodChannel.invokeMethod('getActivities');
+      return apps;
+    } catch (err) {
+      print(err);
+      return null;
+    }
+  }
+
   /// Returns whether a given [packageName] is installed on the device
   /// You will then receive in return a boolean
   static Future<bool> isAppInstalled(String packageName) {
