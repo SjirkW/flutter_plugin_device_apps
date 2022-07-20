@@ -194,6 +194,8 @@ public class DeviceAppsPlugin implements
         }
 
         Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+        launchIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         if (IntentUtils.isIntentOpenable(launchIntent, context)) {
             context.startActivity(launchIntent);
